@@ -1,0 +1,12 @@
+{
+  "name": "njc-instagram",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "gerar": "node ferramentas/gerar.mjs",
+    "publicar": "node ferramentas/publicar.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.4"
+  }
+}

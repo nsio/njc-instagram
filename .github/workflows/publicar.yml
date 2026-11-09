@@ -1,0 +1,50 @@
+name: Publicar no Instagram
+
+on:
+  push:
+    branches: [main]
+    paths: ['posts/**']
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      so_verificar:
+        description: 'Só testar o token, sem publicar'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-instagram
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Publicar post pendente
+        run: node ferramentas/publicar.mjs
+        env:
+          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          IG_USER_ID: '17841480903531170'
+          PAGES_BASE: https://nsio.github.io/njc-instagram
+          SO_VERIFICAR: ${{ inputs.so_verificar && '1' || '' }}
+
+      - name: Registrar publicação
+        run: |
+          if [ -n "$(git status --porcelain posts)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add posts
+            git commit -m "chore: registra publicação no Instagram"
+            for i in 1 2 3; do git pull --rebase && git push && break; sleep 5; done
+          fi
