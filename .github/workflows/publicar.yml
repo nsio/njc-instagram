@@ -1,11 +1,8 @@
 name: Publicar no Instagram
 
+# Só roda quando alguém dispara à mão (Actions → Publicar no Instagram → Run workflow).
+# Nada é agendado e nada é publicado sozinho.
 on:
-  push:
-    branches: [main]
-    paths: ['posts/**']
-  schedule:
-    - cron: '*/15 * * * *'
   workflow_dispatch:
     inputs:
       so_verificar:

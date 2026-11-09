@@ -15,11 +15,12 @@ posts/
 
 ## Como um post vai para o ar
 
-1. Os posts do dia chegam num **PR**. O PR é o pedido de aprovação.
-2. **Merge do PR = aprovado.** Sem merge, nada é publicado.
-3. O GitHub Pages coloca as imagens no ar em `https://nsio.github.io/njc-instagram/...`. A API do Instagram só aceita imagem por link público.
-4. A automação [Publicar no Instagram](.github/workflows/publicar.yml) roda a cada 15 minutos e publica **um post por vez**, quando o horário de `post.json` chega.
-5. Depois de publicar, ela grava `publicado.json` com o link do post.
+Nada é agendado: a publicação só acontece quando alguém dispara.
+
+1. O post é gerado na pasta do dia e revisado.
+2. Com a aprovação, a automação [Publicar no Instagram](.github/workflows/publicar.yml) é disparada à mão (Actions → Publicar no Instagram → Run workflow).
+3. Ela publica **um post** pendente, usando as imagens do GitHub Pages (`https://nsio.github.io/njc-instagram/...`), porque a API do Instagram só aceita imagem por link público.
+4. Depois de publicar, ela grava `publicado.json` com o link do post.
 
 Se a publicação falhar, a execução fica vermelha em **Actions** e o GitHub manda e-mail.
 
