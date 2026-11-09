@@ -29,7 +29,7 @@ jobs:
           node-version: 22
 
       - name: Publicar post pendente
-        run: node ferramentas/publicar.mjs
+        run: node .github/scripts/publicar.mjs
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
           IG_USER_ID: '17841480903531170'

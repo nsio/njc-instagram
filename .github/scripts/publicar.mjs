@@ -1,5 +1,5 @@
 // Publica no Instagram da NjC os posts cujo horário já chegou e que ainda não têm publicado.json.
-// Roda no GitHub Actions (.github/workflows/publicar.yml). Sem dependências.
+// Roda no GitHub Actions (.github/workflows/publicar.yml), disparado à mão.
 //
 // Variáveis: INSTAGRAM_TOKEN (segredo), IG_USER_ID, PAGES_BASE (onde o GitHub Pages serve as imagens),
 // SO_VERIFICAR=1 para só testar o token, sem publicar.
